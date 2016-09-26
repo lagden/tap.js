@@ -1,25 +1,67 @@
 {
-  "name": "tap.js",
-  "version": "2.2.0",
+  "name": "lagden-tap",
+  "version": "1.0.0",
   "description": "A custom tap event JavaScript plugin for mobile and tablet web browsers",
-  "main": "tap.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alexgibson/tap.js.git"
-  },
   "keywords": [
-    "javascript",
     "tap",
-    "touch",
-    "event"
+    "mobile",
+    "delay"
   ],
-  "author": "Alex Gibson <alxgbsn@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alexgibson/tap.js/issues"
+  "bug": {
+    "url": "https://github.com/lagden/tap.js/issues",
+    "email": "lagden@gmail.com"
   },
-  "homepage": "https://github.com/alexgibson/tap.js"
+  "license": "MIT",
+  "author": "Alex Gibson <alxgbsn@gmail.com>",
+  "contributors": [
+    "Thiago Lagde <lagden@gmail.com> (http://lagden.in/)"
+  ],
+  "main": "dist/tap.js",
+  "jsnext:main": "src/tap.js",
+  "repository": "lagden/tap.js",
+  "scripts": {
+    "rm": "rm -rf dist",
+    "rollup": "npm run rm && BABEL_ENV=rollup rollup -c && BABEL_ENV=rollup rollup -c rollup.config.jquery.js",
+    "pretest": "xo",
+    "test": "echo \"No tests\"",
+    "gzip": "find ./dist -name '*.js' -type f -exec sh -c 'gzip -c --best {} > {}.gz' \\;",
+    "build": "npm test && npm run rollup && npm run gzip"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "rollup": "0.35.9",
+    "rollup-plugin-buble": "0.13.0",
+    "xo": "0.16.0"
+  },
+  "xo": {
+    "ignore": [
+      "dist/*.js"
+    ],
+    "envs": [
+      "es6"
+    ],
+    "esnext": true,
+    "global": [
+      "window",
+      "document",
+      "HTMLElement"
+    ]
+  },
+  "babel": {
+    "env": {
+      "rollup": {
+        "presets": [
+          "es2015-rollup"
+        ]
+      }
+    }
+  },
+  "files": [
+    "src",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ]
 }

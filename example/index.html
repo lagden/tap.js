@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Apenas um show">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<meta name="robots" content="noindex, nofollow">
+		<title>Tap.js demo</title>
+		<script src="../dist/tap.js"></script>
+		<style>
+		button {
+			width: 100px;
+			height: 44px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<button id="button-1" type="button">Click event</button>
+			<button id="button-2" type="button">Tap event</button>
+		</div>
+		<div id="output"></div>
+		<script>
+		var container = document.getElementById('container')
+		var button1 = document.getElementById('button-1');
+		var button2 = document.getElementById('button-2');
+		var output = document.getElementById('output');
+		var tap = new Tap(container);
+
+		console.log(tap);
+
+		function callback(event) {
+			console.log(event.type);
+			event.preventDefault();
+			var p = document.createElement('p');
+			p.textContent = 'event: ' + event.type;
+			output.insertBefore(p, output.firstChild);
+		}
+
+		button1.addEventListener('click', callback, false);
+		button2.addEventListener('tap', callback, false);
+		</script>
+	</body>
+</html>
